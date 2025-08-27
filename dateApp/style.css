@@ -6,6 +6,7 @@
 body {
     font-family: var(--main-font);
     background-color: gray;
+    transition: 1s ease-in;
 }
 
 .header-text {
@@ -22,12 +23,9 @@ body {
     align-items: center;
     justify-content: center;
     background-color: rgb(214, 214, 214);
-    width: 300px;
-    height: 100px;
+    padding: 100px;
     border-radius: 20px;
     border: white 2px solid;
-    
-    
 }
 
 main {
@@ -46,13 +44,13 @@ main {
     width: 90%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 20px;
     padding-top: 7px;
     transition: 1s cubic-bezier(.04,.89,.16,.96);
 }
 
 .button {
+    flex-grow: 1;
     border: none;
     padding: 10px;
     border-radius: 10px;

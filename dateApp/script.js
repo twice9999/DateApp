@@ -1,3 +1,5 @@
+
+
 selectors = {
     dateInfo: '[date-info]',
     getFullDate: '[get-full-date]',
@@ -5,74 +7,58 @@ selectors = {
     getTime: '[getTime]',
     contentAreaController: '[content-area-controller]'
 }
-dateInfoElement = document.querySelector(this.selectors.dateInfo);
-getFullDateButton = document.querySelector(this.selectors.getFullDate);
-getDateButton = document.querySelector(this.selectors.getDate);
-getTimeButton = document.querySelector(this.selectors.getTime);
-contentAreaControllerElement =  document.querySelector(this.selectors.contentAreaController);
-let showtimeon = undefined;
-const date = new Date();
-
-let showFullDateincluded = false;
-let showDateIncluded = false;
-let showTimeincluded = false;
-
-const formatDateRU = new Intl.DateTimeFormat('ru', {
-        day: 'numeric',
-        month: 'long'
-    });
-
-function showFullDate() {
-    const formatFullDateRU = new Intl.DateTimeFormat('ru', {
-        year:'numeric',
-        day: 'numeric',
-        month: 'long'
-    })
-    dateInfoElement.innerText = formatFullDateRU.format(new Date());
-    contentAreaControllerElement.style.width = '300px';
-    
-}
-
-function showDate() {
-    const formatDateRU = new Intl.DateTimeFormat('ru', {
-        day: 'numeric',
-        month: 'long'
-    })
-
-    dateInfoElement.innerText = formatDateRU.format(new Date());
-}
-
-function showTime() {
-    const formatTimeRU = new Intl.DateTimeFormat('RU', {
-        hour:"numeric",
-        minute:"numeric",
-        second:"numeric"
-    })
-    dateInfoElement.innerText = formatTimeRU.format(new Date());
-}
-
-getDateButton.addEventListener('click', () => {
-    clearInterval(interval1);
-    showtimeon = undefined;
-    getTimeButton.innerText = "Время";
-    showDate();
-})
+const output = document.querySelector(this.selectors.dateInfo);
+const fullBtn = document.querySelector(this.selectors.getFullDate);
+const dateBtn = document.querySelector(this.selectors.getDate);
+const timeBtn = document.querySelector(this.selectors.getTime);
 
 
 
-getFullDateButton.addEventListener('click', ()=> {
-    clearInterval(interval1);
-    showtimeon = undefined;
-    getTimeButton.innerText = "Время";
-    showFullDate();
-})
 
-getTimeButton.addEventListener('click', () => {
-    if(showtimeon == false || showtimeon == undefined) {
-        interval1 = setInterval(() => {
-            showTime();
-        }, 1000);
-        showtimeon = true;
+function changeOutPut(key) {
+    switch (key) {
+        case 'full':
+            clearInterval(interval1);
+            output.textContent = new Intl.DateTimeFormat('RU', {
+                year:"numeric",
+                month:"long",
+                day: "numeric"
+            }).format(new Date());
+            break;
+        case 'date':
+            clearInterval(interval1);
+            output.textContent = new Intl.DateTimeFormat('RU', {
+                month:"long",
+                day:"numeric"
+            }).format(new Date());
+            break;
+        case 'time':
+            interval1 = setInterval(() => {
+                output.textContent = new Intl.DateTimeFormat('RU', {
+                hour:"numeric",
+                minute:"numeric",
+                second:"numeric",
+            }).format(new Date());
+            }, 1000);
+        default:
+            output.textContent = 'Date app';
+            break;
     }
+}
+
+
+
+fullBtn.addEventListener('click', () => {
+    changeOutPut('full');
 })
 
+
+
+dateBtn.addEventListener('click', () => {
+    changeOutPut('date');
+})
+
+
+timeBtn.addEventListener('click', () => {
+    changeOutPut('time');
+})
