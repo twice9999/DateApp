@@ -52,6 +52,8 @@ function showTime() {
 }
 
 getDateButton.addEventListener('click', () => {
+    clearInterval(interval1);
+    showtimeon = undefined;
     getTimeButton.innerText = "Время";
     showDate();
 })
@@ -59,6 +61,8 @@ getDateButton.addEventListener('click', () => {
 
 
 getFullDateButton.addEventListener('click', ()=> {
+    clearInterval(interval1);
+    showtimeon = undefined;
     getTimeButton.innerText = "Время";
     showFullDate();
 })
