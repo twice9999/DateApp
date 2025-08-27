@@ -69,15 +69,10 @@ getFullDateButton.addEventListener('click', ()=> {
 
 getTimeButton.addEventListener('click', () => {
     if(showtimeon == false || showtimeon == undefined) {
-        getTimeButton.innerText = "Выкл."
         interval1 = setInterval(() => {
             showTime();
         }, 1000);
         showtimeon = true;
-    } else if(showtimeon == true) {
-        getTimeButton.innerText = "Вкл."
-        showtimeon = undefined;
-        clearInterval(interval1);
     }
 })
 
